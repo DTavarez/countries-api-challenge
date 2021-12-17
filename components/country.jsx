@@ -1,0 +1,26 @@
+import React from 'react';
+
+function country({country, key}){
+
+    return (
+        <div className="card shadow elements" key={key}>
+            <div className="card-image">
+                <img className="flag" src={country.flag} ></img>
+            </div>
+            <div className="card-body">   
+                <div className="card-title">
+                    <span>{country.name}</span> 
+                </div>
+                <div className="card-resume">
+                    <ul>
+                        <li><span className="detail-key">Population: </span><span> {country.population}</span></li>
+                        <li><span className="detail-key">Region: </span> <span> {country.region}</span></li>
+                        <li><span className="detail-key">Capital: </span> <span> {country.capital}</span></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    )
+}
+
+export default country;
