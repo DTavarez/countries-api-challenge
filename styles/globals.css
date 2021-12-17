@@ -39,10 +39,10 @@ ul {
   align-items: center;
   justify-content: space-between;
   width: 100%;
-  padding-top: 15px;
-  padding-bottom: 15px;
-  padding-left: 10px;
-  padding-right: 10px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  padding-left: 20px;
+  padding-right: 20px;
 }
 
 @media (min-width: 500px) {
@@ -54,8 +54,7 @@ ul {
 
 /* NAVBAR */
 
-.navbar{
-}
+
 
 .navbar .header1{
   font-size: 18px;
@@ -71,6 +70,7 @@ ul {
 
 .listItems .container{
   flex-flow: row wrap;
+  justify-content: center;
   
 }
 
@@ -78,6 +78,7 @@ ul {
   .listItems .container{
     padding-left: 60px;
     padding-right: 60px;
+    justify-content: space-between;
   }
 }
 
@@ -86,7 +87,7 @@ ul {
 .card{
   width: 260px;
   height: 300px;
-  margin: 20px 50px
+  margin: 20px 40px
 }
 
 @media (min-width: 500px) {
@@ -96,8 +97,6 @@ ul {
     margin: 20px 40px
   }
 }
-
-
 
 
 .card-image {

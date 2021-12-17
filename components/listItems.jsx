@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import Country from '../components/country'
-import InfiniteScroll from 'react-infinite-scroller';
 
 function listItems({countries}){
     const [perPage, setPerPage] = useState(32);
