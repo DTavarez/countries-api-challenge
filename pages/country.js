@@ -25,10 +25,13 @@ function Country() {
 
     if(res.status === 200){
       setSearchError(false);
-      setFocusCountry(res.data[0]);
-
-      if(res.data[0]){
-        getBorderCountries(res.data[0]);
+      if(res.data.length > 0){
+        for(let i=0; i<res.data.length ;i++){
+          if(res.data[i].name === String(name)){
+            setFocusCountry(res.data[i]);
+            getBorderCountries(res.data[i]);
+          }
+        }
       }
     }else{
       setSearchError(true);
@@ -40,10 +43,13 @@ function Country() {
     let results = [];
     const url = "https://restcountries.com/v2/alpha?codes=";
 
+    if(!("borders" in value)){
+     return;
+    }
+ 
     for(let i=0; i<value.borders.length ;i++){
       url += value.borders[i].toLowerCase() + ",";
     }
-  
     const res = await axios.get(url);
 
     if(res.status === 200){
@@ -81,7 +87,7 @@ function Country() {
       <Navbar/>
         <div className="body-container section-padding-vertical">
           <a className="wrld-btn shadow elements" onClick={()=>Router.push({pathname: "/",})}>
-            <i class="fa fa-long-arrow-left" style={{paddingTop: "3px"}}></i>
+            <i className="fa fa-long-arrow-left" style={{paddingTop: "3px"}}></i>
             <span>Back</span>
           </a>
           <div className="section-padding-vertical">

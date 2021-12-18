@@ -15,7 +15,7 @@ function Filter({handleSearchChange}){
             </div>
             <input 
                 type="text"
-                className="filter-input"
+                className="filter-input elements"
                 placeholder="Search for a country..."
                 onChange={(e) => setFilterSearch(e.target.value)}
             />

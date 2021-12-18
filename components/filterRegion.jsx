@@ -11,7 +11,7 @@ function Filter({options, handleRegionFilter}){
     return (
         <div className="wrld-filter-region">
             <select 
-                className="filter-region shadow"
+                className="filter-region elements shadow"
                 value={region} 
                 onChange={(e)=>setRegion(e.target.value)}
             >
