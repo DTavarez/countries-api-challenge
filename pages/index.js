@@ -13,48 +13,57 @@ import '../node_modules/font-awesome/css/font-awesome.min.css'
 export default function Home() {
 
   const [countries, setCountries] = useState([]);
-  const [loadingCountries, setLoadingCountries] = useState(false);
-  const [focusCountry, setFocusCountry] = useState();
   const [perPage, setPerPage] = useState(32);
 
-  function updateCountry(country){
+  function updateFocusCountry(country){
     setFocusCountry(country);
+    getRegionCountries(country);
   }
 
-  async function getCountries(){
-    setLoadingCountries(true);
-    const res = await axios.get(`https://restcountries.com/v2/all`);
+  async function getRegionCountries(country){
+    const res = await axios.get("https://restcountries.com/v2/region/" + country.region);
     setCountries(res.data);
-    setLoadingCountries(false);
+    setRegionCountries(res.data);
+  } 
+
+  async function getCountries(){
+    const res = await axios.get("https://restcountries.com/v2/all");
+    setCountries(res.data);
   } 
 
   useEffect(() => {
+
     getCountries()
+
   }, []);
 
   function loadMore() {
+
     setPerPage(perPage + 10);
+
   }
 
   useEffect(() => {
+
     countries.slice(0, perPage);
+
   }, [perPage]);
 
+
   function handleScroll() {
-    console.log("hey")
-    if (
-        window.innerHeight + document.documentElement.scrollTop <
-        document.documentElement.offsetHeight
-    ) {
+
+    if (window.innerHeight + document.documentElement.scrollTop < document.documentElement.offsetHeight){
         return;
     }
-
     loadMore();
   }
 
   useEffect(() => {
+
     window.addEventListener('scroll', handleScroll);
+    
     return () => window.removeEventListener('scroll', handleScroll);
+
   }, [handleScroll]);
 
   return (
@@ -66,7 +75,9 @@ export default function Home() {
       </Head>
       <main>
         <Navbar/>
-        <ListItems countries={countries.slice(0, perPage)} setFocusCountry={setFocusCountry}/>
+        <div className="body-container section-padding-vertical" >
+          <ListItems countries={countries.slice(0, perPage)}/>
+        </div>
       </main>
     </div>
   )

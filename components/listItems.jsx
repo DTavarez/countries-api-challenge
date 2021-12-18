@@ -1,16 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import Country from '../components/country'
+import Country from './cardCountry'
 
 function listItems({countries}){
-    const [perPage, setPerPage] = useState(32);
 
     return (
-        <div className="listItems countries elements-padding">
-            <div className="container">
+        <div className="listItems section-padding-vertical">
                 {countries.map((country, key) => (
-                    <Country country={country} key={key}/>
+                    <Country onClick={()=>console.log("ups")} country={country}/>
                 ))} 
-            </div>
         </div>
     )
 }
