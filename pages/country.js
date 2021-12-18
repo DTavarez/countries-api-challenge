@@ -12,7 +12,8 @@ import '../node_modules/font-awesome/css/font-awesome.min.css'
 
 function Country() {
  
-  const [country, setFocusCountry ] = useState();;
+  const [country, setFocusCountry ] = useState();
+  const [borderCountries, setBorderCountries] = useState([]);
   const [loading, setLoading ] = useState(false);
   const [searchError, setSearchError ] = useState(false);
 
@@ -23,21 +24,41 @@ function Country() {
     const res = await axios.get(url);
 
     if(res.status === 200){
-      setFocusCountry(res.data[0]);
       setSearchError(false);
+      setFocusCountry(res.data[0]);
+
+      if(res.data[0]){
+        getBorderCountries(res.data[0]);
+      }
     }else{
       setSearchError(true);
     }
   } 
 
+  async function getBorderCountries(value){
+
+    let results = [];
+    const url = "https://restcountries.com/v2/alpha?codes=";
+
+    for(let i=0; i<value.borders.length ;i++){
+      url += value.borders[i].toLowerCase() + ",";
+    }
+  
+    const res = await axios.get(url);
+
+    if(res.status === 200){
+      for(let i=0; i<res.data.length ;i++){
+        results.push({flag: res.data[i].flag, name: res.data[i].name});
+      }
+      setBorderCountries(results);
+    }
+  } 
+
   useEffect(() => { 
-
     setLoading(false);
-
   }, [country]);
 
   useEffect(() => {
-
     const {name} = router.query;
 
     if(name){
@@ -46,7 +67,6 @@ function Country() {
     }else{
       setSearchError(true);
     }
-
   }, [router.query]);
   
   return (
@@ -80,49 +100,74 @@ function Country() {
                   <img className="wrld-image flag" src={country.flag} ></img>
                 </div>
                 <div className="card-expanded-body col-12	col-sm-6 no-padding-horizontal">  
-                <div className="card-expanded-title">
+                  <div className="card-expanded-title">
                     <span>{country.name}</span> 
+                  </div>
+                  <div className="card-expanded-resume row no-padding-horizontal">
+                    <ul className="element-padding-vertical col-12 col-sm-6 no-padding-horizontal">
+                      <li>
+                        <span className="detail-key">Native Name: </span>
+                        <span className="detail-value"> {country.nativeName}</span>
+                      </li>
+                      <li>
+                        <span className="detail-key">Population: </span>
+                        <span className="detail-value">{country.population}</span>
+                      </li>
+                      <li>
+                        <span className="detail-key">Region: </span>
+                        <span className="detail-value">{country.region}</span>
+                      </li>
+                      <li>
+                        <span className="detail-key">Sub Region: </span>
+                        <span className="detail-value">{country.subregion}</span>
+                      </li>
+                      <li>
+                        <span className="detail-key">Capital: </span>
+                        <span className="detail-value">{country.capital}</span>
+                      </li>
+                    </ul>
+                    <ul className="element-padding-vertical col-12 col-sm-6 no-padding-horizontal">
+                      <li>
+                        <span className="detail-key">Top Level Domain: </span>
+                        <span className="detail-value">{country.topLevelDomain.map((domain, key) => {return <span>{domain}</span>})}</span>
+                      </li>
+                      <li>
+                        <span className="detail-key">Currencies: </span>
+                        <span className="detail-value">{country.currencies.map((currency, key) => {return <span>{currency.name}</span>})}</span>
+                      </li>
+                      <li>
+                        <span className="detail-key">Language: </span>
+                        <span className="detail-value">{country.languages.map((language, key) => {return <span>{language.name}</span>})}</span>
+                      </li>
+                    </ul>
+                    <div className="card-expanded-suggestions element-padding-vertical">
+                      <span className="detail-key">Border Countries: </span>
+                      <div className="list-suggestions">
+                        {borderCountries.map((border, key) => {
+                          return (
+                            <div 
+                              className="suggestion-item shadow" 
+                              onClick={()=>Router.push({
+                                pathname: "/country",
+                                query: {name: border.name}
+                              })}
+                            >
+                              <div>
+                                <img className="suggestion-image center-vertically" src={border.flag}></img>
+                              </div>
+                              <span>{border.name} </span>
+                            </div>
+                          )})
+                        }
+                      </div>
+                     
+                    </div>
+                  </div> 
                 </div>
-                <div className="card-expanded-resume row no-padding-horizontal">
-                  <ul className="element-padding-vertical col-12 col-sm-6 no-padding-horizontal">
-                    <li>
-                      <span className="detail-key">Native Name: </span>
-                      <span className="detail-value"> {country.nativeName}</span>
-                    </li>
-                    <li>
-                      <span className="detail-key">Population: </span>
-                      <span className="detail-value">{country.population}</span>
-                    </li>
-                    <li>
-                      <span className="detail-key">Region: </span>
-                      <span className="detail-value">{country.region}</span>
-                    </li>
-                    <li>
-                      <span className="detail-key">Sub Region: </span>
-                      <span className="detail-value">{country.subregion}</span>
-                    </li>
-                    <li>
-                      <span className="detail-key">Capital: </span>
-                      <span className="detail-value">{country.capital}</span>
-                    </li>
-                  </ul>
-                  <ul className="element-padding-vertical col-12 col-sm-6 no-padding-horizontal">
-                    <li>
-                      <span className="detail-key">Top Level Domain: </span>
-                      <span className="detail-value">{country.topLevelDomain.map((domain, key) => {return <spa>{domain}  </spa>})}</span>
-                    </li>
-                    <li>
-                      <span className="detail-key">Currencies: </span>
-                      <span className="detail-value">{country.currencies.map((currency, key) => {return <spa>{currency.name}  </spa>})}</span>
-                    </li>
-                    <li>
-                      <span className="detail-key">Language: </span>
-                      <span className="detail-value">{country.languages.map((language, key) => {return <spa>{language.name}  </spa>})}</span>
-                    </li>
-                  </ul>
-                </div> 
               </div>
-             </div>
+            }
+            { //border countries
+              
             }
           </div>
         </div>

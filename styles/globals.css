@@ -87,8 +87,8 @@ ul {
 
 @media (min-width: 500px) {
   .element-padding-vertical{
-    padding-top: 50px;
-    padding-bottom: 50px;
+    padding-top: 20px;
+    padding-bottom: 20px;
   }
 }
 
@@ -246,13 +246,19 @@ ul {
   padding: 30px 20px;
 }
 
+@media (min-width: 500px) {
+  .card-expanded-body{
+    padding: 0px;
+  }  
+}
+
 .card-expanded-title {
   margin-bottom: 8px;
   margin-top: 5px;
 }
 
 .card-expanded-title span{
-  font-size: 30px;
+  font-size: 26px;
   font-weight: bolder;
 }
 
@@ -267,6 +273,35 @@ ul {
 
 .card-expanded-resume .detail-key{
   font-weight: bold;
+}
+
+.card-expanded-suggestions {
+  display: block;
+}
+
+.list-suggestions {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 5px 0px;
+  margin-left: -5px;
+  margin-right: -5px;
+}
+
+.suggestion-image {
+  width: 20px;
+  height: 15px;
+}
+
+.suggestion-item {
+  width: fit-content;
+  padding: 7px 10px;
+  margin: 5px 5px;
+  display: flex;
+  cursor: pointer;
+}
+
+.suggestion-item span{
+  margin-left: 5px;
 }
 
 /* Filter */
@@ -315,7 +350,8 @@ input:focus{
 input{
   border: unset;
 }
-.icon{
+
+.center-vertically{
   position:relative;
   top:42%;
   left:50%;
