@@ -24,13 +24,15 @@ function Country() {
 
     if(res.status === 200){
       setFocusCountry(res.data[0]);
+      setSearchError(false);
+    }else{
+      setSearchError(true);
     }
   } 
 
   useEffect(() => { 
 
     setLoading(false);
-    setSearchError(true);
 
   }, [country]);
 
@@ -41,6 +43,8 @@ function Country() {
     if(name){
       setLoading(true);
       getCountry(name);
+    }else{
+      setSearchError(true);
     }
 
   }, [router.query]);
@@ -61,14 +65,15 @@ function Country() {
             <span>Back</span>
           </a>
           <div className="section-padding-vertical">
-            {loading && 
+            {/*loading && 
               <div className="center-screen">
                 Loading...
               </div>
-            }   
-            {!searchError && !loading && <div className="center-screen">
+            */}   
+            {searchError && !loading && <div className="center-screen">
               Country not found, go back
             </div>}
+
             {!loading && country &&
               <div className="card-expanded row no-padding-horizontal">
                 <div className="card-expanded-image col-12 col-sm-5 no-padding-horizontal">
