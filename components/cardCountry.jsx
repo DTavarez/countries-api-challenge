@@ -4,8 +4,6 @@ import Link from 'next/link'
 
 function cardCountry({country}){
 
-    console.log(country)
-
     return (
             <div 
                 className="card shadow elements" 
