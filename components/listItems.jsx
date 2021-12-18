@@ -5,7 +5,9 @@ function listItems({countries}){
     return (
         <div className="listItems section-padding-vertical">
             {countries.length > 0 && countries.map((country, key) => (
-                <Country country={country}/>
+                <div key={key}>
+                    <Country country={country}/>
+                </div>
             ))} 
         </div>
     )

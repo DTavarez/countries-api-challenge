@@ -16,8 +16,8 @@ function Filter({options, handleRegionFilter}){
                 onChange={(e)=>setRegion(e.target.value)}
             >
                 <option value="All">Filter by Region</option>
-                {options && options.map((option)=>{
-                    return <option value={option}>{option}</option>
+                {options && options.map((option,key)=>{
+                    return <option key={key} value={option}>{option}</option>
                 })}
             </select>
         </div>

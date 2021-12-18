@@ -7,7 +7,6 @@ function cardCountry({country}){
     return (
             <div 
                 className="card shadow elements" 
-                key={country.name} 
                 onClick={()=>Router.push({
                     pathname: "/country",
                     query: {name: country.name}

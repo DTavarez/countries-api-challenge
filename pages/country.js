@@ -135,15 +135,15 @@ function Country() {
                     <ul className="element-padding-vertical col-12 col-sm-6 no-padding-horizontal">
                       <li>
                         <span className="detail-key">Top Level Domain: </span>
-                        <span className="detail-value">{country.topLevelDomain.map((domain, key) => {return <span>{domain}</span>})}</span>
+                        <span className="detail-value">{country.topLevelDomain.map((domain, key) => {return <span key={key}>{domain}</span>})}</span>
                       </li>
                       <li>
                         <span className="detail-key">Currencies: </span>
-                        <span className="detail-value">{country.currencies.map((currency, key) => {return <span>{currency.name}</span>})}</span>
+                        <span className="detail-value">{country.currencies.map((currency, key) => {return <span key={key}>{currency.name}</span>})}</span>
                       </li>
                       <li>
                         <span className="detail-key">Language: </span>
-                        <span className="detail-value">{country.languages.map((language, key) => {return <span>{language.name}</span>})}</span>
+                        <span className="detail-value">{country.languages.map((language, key) => {return <span key={key}>{language.name}</span>})}</span>
                       </li>
                     </ul>
                     <div className="card-expanded-suggestions element-padding-vertical">
@@ -157,6 +157,7 @@ function Country() {
                                 pathname: "/country",
                                 query: {name: border.name}
                               })}
+                              key={key}
                             >
                               <div>
                                 <img className="suggestion-image center-vertically" src={border.flag}></img>
