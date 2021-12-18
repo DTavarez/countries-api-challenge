@@ -1,9 +1,15 @@
 import '../styles/globals.css'
-import React, { useState, useEffect } from 'react';
+import React from 'react';
+import {AppThemeProvider} from "../contexts/themeContext"
+
+
 
 function MyApp({ Component, pageProps }) {
+
   return (
-      <Component {...pageProps} />
+      <AppThemeProvider>
+          <Component {...pageProps} />
+      </AppThemeProvider>
     )
 }
 

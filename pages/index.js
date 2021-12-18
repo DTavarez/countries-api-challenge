@@ -1,12 +1,12 @@
 import Head from 'next/head'
-import Image from 'next/image'
 import styles from '../styles/Home.module.css'
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect} from 'react';
 import Navbar from '../components/navbar'
 import FilterSearch from '../components/filterSearch'
 import FilterRegion from '../components/filterRegion'
 import ListItems from '../components/listItems'
 import axios from 'axios';
+
 const regions = require("../assets/regions.json");
 
 //import '../node_modules/bootstrap/dist/css/bootstrap.min.css'
@@ -77,11 +77,6 @@ export default function Home() {
 
 
    useEffect(() => {
-
-    // console.log(searchingCountry)
-    // console.log("searching country: " + searchName);
-    // console.log(filteringRegion)
-    // console.log("searching region: " + regionFilter);
 
     if(searchingCountry || filteringRegion){
       
