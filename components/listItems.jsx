@@ -5,9 +5,6 @@ function listItems({countries}){
     //console.log(countries)
     return (
         <div className="listItems section-padding-vertical">
-                {countries.length === 0 && <div className="center-screen">
-                    No country found
-                </div>}
                 {/*searching && <div className="center-screen">
                     Searching...
                 </div>*/}
