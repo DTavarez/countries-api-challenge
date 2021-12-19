@@ -1,4 +1,4 @@
-This project is deployed in netlify, the address is https://frosty-montalcini-5de454.netlify.app/
+This project is deployed on netlify, the address is https://frosty-montalcini-5de454.netlify.app/
 
 Tech:
 - NextJS
