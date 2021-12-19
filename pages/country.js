@@ -20,11 +20,12 @@ function Country() {
   const router = useRouter()
 
   async function getCountry(name){
-    const url = "https://restcountries.com/v2/name/" + String(name).replace(" ", "%20");
+    const url = "https://restcountries.com/v2/name/" + String(name);
     const res = await axios.get(url);
 
     if(res.status === 200){
       setSearchError(false);
+
       if(res.data.length > 0){
         for(let i=0; i<res.data.length ;i++){
           if(res.data[i].name === String(name)){
@@ -33,6 +34,7 @@ function Country() {
           }
         }
       }
+
     }else{
       setSearchError(true);
     }
@@ -50,6 +52,7 @@ function Country() {
     for(let i=0; i<value.borders.length ;i++){
       url += value.borders[i].toLowerCase() + ",";
     }
+
     const res = await axios.get(url);
 
     if(res.status === 200){
@@ -78,9 +81,9 @@ function Country() {
   return (
     <div>
       <Head>
-        <title>Create Next App</title>
+        <title>Where in the world</title>
         <meta name="description" content="Country Api Challenge" />
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href="/globe.ico" />
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap-grid.min.css" />      
       </Head>
       <main>
@@ -90,16 +93,10 @@ function Country() {
             <i className="fa fa-long-arrow-left" style={{paddingTop: "3px"}}></i>
             <span>Back</span>
           </a>
-          <div className="section-padding-vertical">
-            {/*loading && 
-              <div className="center-screen">
-                Loading...
-              </div>
-            */}   
+          <div className="section-padding-vertical">   
             {searchError && !loading && <div className="center-screen">
-              Country not found, go back
+              Country not found
             </div>}
-
             {!loading && country &&
               <div className="card-expanded row no-padding-horizontal">
                 <div className="card-expanded-image col-12 col-sm-5 no-padding-horizontal">
@@ -110,6 +107,7 @@ function Country() {
                     <span>{country.name}</span> 
                   </div>
                   <div className="card-expanded-resume row no-padding-horizontal">
+                    {/*TODO: iterate */}
                     <ul className="element-padding-vertical col-12 col-sm-6 no-padding-horizontal">
                       <li>
                         <span className="detail-key">Native Name: </span>
@@ -167,14 +165,10 @@ function Country() {
                           )})
                         }
                       </div>
-                     
                     </div>
                   </div> 
                 </div>
               </div>
-            }
-            { //border countries
-              
             }
           </div>
         </div>

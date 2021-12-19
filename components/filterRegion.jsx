@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
 function Filter({options, handleRegionFilter}){
-    const [countries, setCountries] = useState([]);
     const [region, setRegion] = useState("");
 
     useEffect(() => {
