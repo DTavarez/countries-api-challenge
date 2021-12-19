@@ -27,11 +27,6 @@ export default function Home() {
   const [loadingResults, setLoadingResults] = useState(true); // if its searching we enable this
   const [perPage, setPerPage] = useState(32);
 
-  // async function getRegionCountries(country){
-  //   const res = await axios.get("https://restcountries.com/v2/region/" + country.region);
-  //   setCountries(res.data);
-  //   setRegionCountries(res.data);
-  // } 
 
   async function getCountries(){
     const res = await axios.get("https://restcountries.com/v2/all");
@@ -56,28 +51,19 @@ export default function Home() {
     setLoadingResults(true);
 
     if(region === "" || region === "All"){
-      
       setFilteringRegion(false);
       setRegionFilter("");
-
     }else{
-
       setFilteringRegion(true);
       setRegionFilter(region);
-
-
     }
-
 }
   useEffect(() => {
-
     getCountries()
-
   }, []);
 
 
    useEffect(() => {
-
     if(searchingCountry || filteringRegion){
       
       let newCountries = [];
@@ -99,9 +85,7 @@ export default function Home() {
           });
         }
       }
-
       setFilteredCountries(newCountries);
-    
     }else{
       setFilteredCountries(countries);
     }
@@ -115,13 +99,10 @@ export default function Home() {
   }
  
   useEffect(() => {
-
     filteredCountries.slice(0, perPage);
-
   }, [perPage]);
 
   function handleScroll() {
-
     if (window.innerHeight + document.documentElement.scrollTop < document.documentElement.offsetHeight){
         return;
     }
@@ -129,19 +110,16 @@ export default function Home() {
   }
 
   useEffect(() => {
-
     window.addEventListener('scroll', handleScroll);
-
     return () => window.removeEventListener('scroll', handleScroll);
-
   }, [handleScroll]);
 
   return (
     <div>
       <Head>
-        <title>Create Next App</title>
+        <title>Where in the world</title>
         <meta name="description" content="Country Api Challenge" />
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href="/globe.ico" />
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap-grid.min.css" />      
       </Head>
       <main>
